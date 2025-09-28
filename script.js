@@ -1,26 +1,30 @@
-const Library = [];
+const Library = {};
 
 const LibraryList = document.querySelector('#Library');
 
-const form = document.querySelectorAll('#newBook input');
+const form = document.querySelectorAll('#newBook .inputs');
 
 const submit = document.querySelector('#submit');
 
-function Book(name, Author, pages, read)
+let deleteButtons = document.querySelectorAll('tr button');
+
+function Book(name, Author, pages, publicationDate, read)
 {
     this.name = name;
     this.Author = Author;
     this.pages = pages;
+    this.publicationDate = publicationDate;
     this.read = read;
 }
 
 submit.addEventListener('click', function() {
-    createPushBook(form);
+    createBook(form);
+    f.style.display = "none";
 });
 
-function createPushBook(form)
+function createBook(form)
 {
-    for(let i = 0; i < 3; i++)
+    for(let i = 0; i < 4; i++)
     {
         if(form[i].value === null || form[i].value === undefined || form[i].value === '')
         {
@@ -28,25 +32,66 @@ function createPushBook(form)
             return;
         }
     }
-    let read;
-    if(form[3].value == 'on')
-    {
-        read = 'yes';
-    }
-    else
-    {
-        read = 'no';
-    }
-    let book = new Book(form[0].value, form[1].value, form[2].value, read);
     
-    Library.push(book);
+    let read = (form[4].checked) ? 'yes' : 'no';
 
-    appendLibraryList(Library);
+    book = new Book(form[0].value, form[1].value, form[2].value, form[3].value, read);
+    
+    appendLibraryList(book);
+
+    for(let i = 0; i < form.length; i++)
+    {
+        form[i].value = '';
+    }
 }
 
 function appendLibraryList(Library)
 {
-    const child = document.createElement("li");
-    child.textContent = `Title: ${Library[0].value} \n Author: ${Library[1].value} \n $ of Pages ${Library[0].value}`;
+    const child = document.createElement("tr");
+    child.innerHTML = child.innerHTML = `<td>${book.name}</td><td>${book.Author}</td><td>${book.pages}</td><td>${book.publicationDate}</td><td>${book.read}</td><td><button>delete</button></td>`;
     LibraryList.appendChild(child);
+    deleteButtons = document.querySelectorAll('tr button');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function()
+        {
+            const li = this.closest('tr');
+            li.remove();
+        }
+    )});
 }
+
+
+
+
+
+//examples
+book = new Book('Harry Potter', 'J. K. Rowling', 309, '1997-06-26', 'yes');
+let child = document.createElement("tr");
+child.innerHTML = child.innerHTML = `<td>${book.name}</td><td>${book.Author}</td><td>${book.pages}</td><td>${book.publicationDate}</td><td>${book.read}</td><td><button>delete</button></td>`;
+LibraryList.appendChild(child);
+
+child = document.createElement("tr");
+book = new Book('Wheel of Time', 'Robert Jordan', 784, '1990-01-15', 'no');
+child.innerHTML = child.innerHTML = `<td>${book.name}</td><td>${book.Author}</td><td>${book.pages}</td><td>${book.publicationDate}</td><td>${book.read}</td><td><button>delete</button></td>`;
+LibraryList.appendChild(child);
+
+deleteButtons = document.querySelectorAll('tr button');
+
+deleteButtons.forEach(button => {
+    button.addEventListener('click', function()
+{
+    const li = this.closest('tr');
+    li.remove();
+})
+})
+
+
+const f = document.querySelector("#newBook");
+
+const formButton = document.querySelector("#formButton");
+
+formButton.addEventListener('click', function()
+{
+    f.style.display = "block";
+})
