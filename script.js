@@ -28,7 +28,7 @@ function createBook(form)
     {
         if(form[i].value === null || form[i].value === undefined || form[i].value === '')
         {
-            console.log("must answer all questions");
+            alert("must answer all questions");
             return;
         }
     }

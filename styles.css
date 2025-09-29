@@ -5,12 +5,17 @@
     color: white;
 }
 
-button {
+button, #submit {
     background: none;
+}
+
+#submit {
+    color: white;
 }
 
 input {
     display: block;
+    color: black;
 }
 
 table {
@@ -43,14 +48,15 @@ td, th {
 #newBook {
     display: none;
     position: absolute;
-    justify-self: center;
-    align-self: center;
-    background-color: rgba(0, 128, 128, 0.5);
-    gap: 5px;
-    height: 100vh;
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    gap: 0px;
+    height: 50vh;
+    width: 50vw;
+    justify-self: start;
     align-content: center;
     justify-items: center;
+    top: 100px;
+    overflow: auto;
 }
 
 form {

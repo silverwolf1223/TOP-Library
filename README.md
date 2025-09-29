@@ -1,1 +1,1 @@
-# TOP-Library
+This is a library project for The Odin Project that demonstrates understanding of object prototypes and constructors.
